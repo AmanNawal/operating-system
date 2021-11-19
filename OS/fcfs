@@ -1,0 +1,87 @@
+#include<stdio.h>
+
+struct process
+{
+int pid,at,bt,ct,tat,wt,rt,start_time;
+}ps[100];
+
+
+
+void sortprocess(int n)
+{
+
+
+for(int i=0;i<n;i++)
+{
+for(int j=i+1;j<n;j++)
+{
+struct process temp;
+if(ps[i].at>ps[j].at)
+{
+//printf("%d   %d",ps[i].at,ps[i].bt);
+temp=ps[i];
+ps[i]=ps[j];
+ps[j]=temp;
+}
+}
+}
+}
+
+void main()
+{
+
+int arrival,burst,n;
+printf("Enter total number of processes:\n");
+scanf("%d",&n);
+printf("enter arrival time:\n");
+
+for(int i=0;i<n;i++)
+{
+scanf("%d",&ps[i].at);
+}
+
+
+printf("Enter burst time:\n");
+for(int i=0;i<n;i++)
+{
+scanf("%d",&ps[i].bt);
+}
+
+sortprocess(n);
+
+ps[0].ct=ps[0].at+ps[0].bt;
+ps[0].tat=ps[0].ct-ps[0].at;
+ps[0].wt=0;
+ps[0].rt=0;
+
+for(int i=1;i<n;i++)
+{
+if(ps[i].at>ps[i-1].ct)
+{
+ps[i].ct=ps[i].at+ps[i].bt;
+ps[i].tat=ps[i].ct-ps[i].at;
+ps[i].wt=ps[i].tat-ps[i].bt;
+ps[i].rt==ps[i].wt;
+}
+else
+{
+ps[i].ct=ps[i-1].ct+ps[i].bt;
+ps[i].tat=ps[i].ct-ps[i].at;
+ps[i].wt=ps[i].tat-ps[i].bt;
+ps[i].rt==ps[i].wt;
+}
+
+}
+
+printf("AT  BT  CT  TAT  WT  RT:\n");
+for(int i=0;i<n;i++)
+{
+printf("%d   %d   %d   %d   %d   %d:\n",ps[i].at,ps[i].bt,ps[i].ct,ps[i].tat,ps[i].wt,ps[i].rt);
+}
+
+}
+
+
+
+
+
