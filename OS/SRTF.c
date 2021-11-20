@@ -65,7 +65,7 @@ if(ps[mn].rem_time==ps[mn].bt)//
 ps[mn].start_time=currenttime;
 if(firstprocess==1)
 {
-idealtime=0;
+
 firstprocess=0;
 
 }
@@ -78,6 +78,7 @@ idealtime+=ps[mn].start_time-prev;
 prev=currenttime;
 ps[mn].rem_time-=1;
 currenttime++;
+prev=currenttime;
 if(ps[mn].rem_time==0)
 {
 ps[mn].ct=currenttime;
@@ -86,6 +87,7 @@ ps[mn].wt=ps[mn].tat-ps[mn].bt;
 ps[mn].rt=ps[mn].start_time-ps[mn].at;
 completed++;
 ps[mn].status=1;  //
+
 
 }
 }
@@ -116,5 +118,5 @@ minn=ps[i].at;
 
 int length_cycle=maxx-minn;
 float cpu_utilization=(float)(length_cycle-idealtime)/length_cycle;
-printf("%d cpu_utilization %.2f idealtime\n",cpu_utilization,idealtime);
+printf("%.2f cpu_utilization %d idealtime\n",cpu_utilization,idealtime);
 }
